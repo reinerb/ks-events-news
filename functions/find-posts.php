@@ -66,7 +66,7 @@ function find_news_posts(string $category_name = 'homepage-news', int $number_of
 }
 
 /**
- * Returns an array of FeaturedPost objegts from the given category
+ * Returns an array of FeaturedPost objects from the given category
  * @param string $category_name The category to get posts from
  * @param int $number_of_posts The number of posts to retrieve
  * @return array FeaturedPost[] of all found posts
