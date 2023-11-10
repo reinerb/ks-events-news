@@ -12,7 +12,9 @@ require plugin_dir_path(__FILE__) . 'functions/components.php';
 
 // Enqueue stylesheet
 function enqueue_post_display_scripts () {
+  wp_enqueue_style('swiper-css', plugin_dir_url(__FILE__) . 'css/swiper-bundle.min.css');
   wp_enqueue_style('news_post_display', plugin_dir_url(__FILE__) . 'css/news-posts.css');
+  wp_enqueue_script('swiper-scripts', plugin_dir_url(__FILE__) . 'js/swiper-bundle.min.js');
 }
 add_action('wp_enqueue_scripts', 'enqueue_post_display_scripts');
 
