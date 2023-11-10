@@ -1,0 +1,81 @@
+:root {
+  --card-bg: #14283f;
+  --dark-button-hover-bg: #1f4889;
+  --button-bg: #abbed3;
+  --button-hover-bg: #d4dde9;
+  --peach: #dfa290;
+}
+
+/* Cards */
+
+.post-card {
+  background-color: var(--card-bg);
+  overflow: hidden;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-card__image {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.post-card__content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+
+.post-card__content > * {
+  margin: 0;
+  padding: 0;
+}
+
+.post-card__title {
+  color: white;
+}
+
+.post-card__date-time {
+  font-style: italic;
+}
+
+.post-card__read-more {
+  align-self: center;
+  margin-top: auto;
+  font-weight: 700;
+  color: var(--card-bg);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  background-color: var(--button-bg);
+  transition: background-color 300ms ease;
+}
+
+.post-card__read-more:hover {
+  background-color: var(--button-hover-bg);
+}
+
+/* Grid layout */
+
+.card-grid {
+  --grid-columns: 3;
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  grid-auto-rows: max-content;
+  gap: 2rem;
+  max-width: 1440px;
+}
+
+/* Responsive */
+
+@media screen and (max-width: 900px) {
+  .next-sunday {
+    grid-template-columns: 1fr;
+  }
+
+  .card-grid {
+    --grid-columns: 1;
+  }
+}
