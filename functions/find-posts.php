@@ -6,8 +6,6 @@
  * @return array An array of WordPress posts
  */
 
-use function PHPSTORM_META\map;
-
 require plugin_dir_path( __FILE__ ) . "classes/FeaturedPost.php";
 
 function find_posts(array $query_params) {
