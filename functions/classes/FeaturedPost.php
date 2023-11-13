@@ -1,4 +1,4 @@
-pph3<?php
+<?php
 class FeaturedPost {
   /**
    * The URL of the featured image

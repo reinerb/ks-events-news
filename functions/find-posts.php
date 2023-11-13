@@ -1,13 +1,13 @@
 <?php
-/** 
+ // Imports
+ require plugin_dir_path( __FILE__ ) . "classes/FeaturedPost.php";
+
+ /** 
  * Finds posts with the given query parameters
  * Throws an error if no posts are found
  * @param array $query_params The query parameters
  * @return array An array of WordPress posts
  */
-
-require plugin_dir_path( __FILE__ ) . "classes/FeaturedPost.php";
-
 function find_posts(array $query_params) {
   $query = new WP_QUERY($query_params);
 
