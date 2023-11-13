@@ -16,15 +16,23 @@ class FeaturedSlider {
   }
 
   /**
-   * Renders the wrapper for a slider
+   * Renders a Swiper slide wrapper and image slides
    * @param string $class_name The HTML class for the list
-   * @return string 
+   * @return string The markup for the slider
    */
   public function render_image_slides(
     string $wrapper_class_name = 'swiper-wrapper', 
     string $slide_class_name = 'swiper-slide',
     string $image_class_name = 'featured-slider__image'): string {
-    return '';
+    $wrapper = "<div class=$wrapper_class_name'>";
+
+    for ($i = 0; $i < count($this->featured_posts); $i++) {
+      $wrapper = $wrapper . "<div class='$slide_class_name'>"
+        . $this->featured_posts[$i]->get_image_tag($image_class_name)
+        . "</div>";
+    }
+
+    return $wrapper . "</div>";
   }
 
   public function create_content_array(): array {

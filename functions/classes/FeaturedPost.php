@@ -47,7 +47,9 @@ class FeaturedPost {
    * @param string $html_id The HTML ID
    * @return string An HTML image tag
    */
-  public function get_image_tag(string $class_name = 'featured-slider__image', string $html_id = ''): string {
+  public function get_image_tag(
+    string $class_name = 'featured-slider__image', 
+    string $html_id = ''): string {
     return "<img src='" . $this->img_url . "' class='$class_name' " . ($html_id == '' ? '' : "id='$html_id' ") . "/>";
   }
 
