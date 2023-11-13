@@ -84,11 +84,9 @@ class FeaturedPost {
         . "__date-time>$rendered_date at $rendered_time</p>";
     }
 
-    return "<div class='$class_name' " . ($html_id == '' ? '' : "id='$html_id'") . ">"
-      . "<h3 class='" . $class_name . "__title'>" . $this->title . "</h3>"
+    return "<h3 class='" . $class_name . "__title'>" . $this->title . "</h3>"
       . $rendered_date_time
       . "<p class='" . $class_name . "__excerpt'>" . $this->excerpt . "</p>"
-      . "<a href='" . $this->post_url . "' class='" . $class_name . "'>Read more</a>"
-      . "</div>";
+      . "<a href='" . $this->post_url . "' class='" . $class_name . "'>Read more</a>";
   }
 }
