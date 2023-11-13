@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carousel</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.0.3/swiper-bundle.min.css">
+
+  <style>
+    /* Box sizing rules */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    /* Prevent font size inflation */
+    html {
+      -moz-text-size-adjust: none;
+      -webkit-text-size-adjust: none;
+      text-size-adjust: none;
+    }
+
+    /* Remove default margin in favour of better control in authored CSS */
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    p,
+    figure,
+    blockquote,
+    dl,
+    dd {
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+    ul[role='list'],
+    ol[role='list'] {
+      list-style: none;
+    }
+
+    /* Set core body defaults */
+    body {
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    /* Set shorter line heights on headings and interactive elements */
+    h1,
+    h2,
+    h3,
+    h4,
+    button,
+    input,
+    label {
+      line-height: 1.1;
+    }
+
+    /* Balance text wrapping on headings */
+    h1,
+    h2,
+    h3,
+    h4 {
+      text-wrap: balance;
+    }
+
+    /* A elements that don't have a class get default styles */
+    a:not([class]) {
+      text-decoration-skip-ink: auto;
+      color: currentColor;
+    }
+
+    /* Make images easier to work with */
+    img,
+    picture {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* Inherit fonts for inputs and buttons */
+    input,
+    button,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    /* Make sure textareas without a rows attribute are not tiny */
+    textarea:not([rows]) {
+      min-height: 10em;
+    }
+
+    /* Anything that has been anchored to should have extra scroll margin */
+    :target {
+      scroll-margin-block: 5ex;
+    }
+
+    :root {
+      --theme-background-color: lightblue;
+      --swiper-navigation-color: var(--theme-background-color);
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      font-family: system-ui;
+      padding-block: 2rem;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    #featured.swiper {
+      width: 100%;
+      max-width: 1080px;
+    }
+
+    #featured .swiper-slide img {
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+    }
+
+    #featured-content-wrapper {
+      font-size: 2rem;
+      position: absolute;
+      top: 0;
+      right: 10%;
+      height: 100%;
+      max-height: 100%;
+      width: 40%;
+      max-width: 350px;
+      background: lightblue;
+      padding: 1rem 2rem;
+      z-index: 5;
+    }
+
+    #featured-content-wrapper .slide-content {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      transition: opacity 250ms ease-in-out;
+    }
+
+    #events {
+      max-width: 1440px;
+      width: 100%;
+    }
+
+    .swiper-slide {
+      height: 100%;
+    }
+
+    .event-card {
+      display: flex;
+      flex-direction: column;
+      background-color: lightblue;
+      height: 100%;
+    }
+
+    .event-card__image {
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+    }
+
+    .event-card__content {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+
+    .faded-out {
+      opacity: 0;
+    }
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11.0.3/swiper-bundle.min.js"></script>
+</head>
+
+<body>
+  <div class="swiper" id='featured'>
+    <div role='list' class="swiper-wrapper">
+      <div class="swiper-slide">
+        <img src='https://cdn.pixabay.com/photo/2015/11/16/20/39/cat-1046343_1280.jpg' />
+      </div>
+      <div class="swiper-slide">
+        <img src='https://cdn.pixabay.com/photo/2016/12/18/18/42/kittens-1916542_1280.jpg' />
+      </div>
+      <div class="swiper-slide">
+        <img src='https://cdn.pixabay.com/photo/2018/10/10/13/52/cat-3737295_1280.jpg' />
+      </div>
+      <div class="swiper-slide">
+        <img src='https://cdn.pixabay.com/photo/2018/05/30/19/29/kitten-3442257_1280.jpg' />
+      </div>
+      <div class="swiper-slide">
+        <img src='https://cdn.pixabay.com/photo/2018/09/15/08/14/cat-3678858_1280.jpg' />
+      </div>
+    </div>
+
+    <div id="featured-content-wrapper">
+      <div class="slide-content"></div>
+    </div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+
+  <div class="swiper" id="events">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div class="event-card">
+          <img src="https://cdn.pixabay.com/photo/2015/11/16/20/39/cat-1046343_1280.jpg" alt="A cat"
+            class="event-card__image">
+          <div class="event-card__content">
+            <h3 class="event-card__title">Pet This Cat</h3>
+            <p class="event-card__date-time">Today at 1pm</p>
+            <p class="event-card__excerpt">These cats are all so cute. Let's pet them!</p>
+            <a href="" class="event-card__read-more">Read more</a>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <div class="event-card">
+          <img src="https://cdn.pixabay.com/photo/2016/12/18/18/42/kittens-1916542_1280.jpg" alt="A cat"
+            class="event-card__image">
+          <div class="event-card__content">
+            <h3 class="event-card__title">Pet This Cat</h3>
+            <p class="event-card__date-time">Today at 1pm</p>
+            <p class="event-card__excerpt">These cats are all so cute. Let's pet them!</p>
+            <a href="" class="event-card__read-more">Read more</a>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <div class="event-card">
+          <img src="https://cdn.pixabay.com/photo/2018/10/10/13/52/cat-3737295_1280.jpg" alt="A cat"
+            class="event-card__image">
+          <div class="event-card__content">
+            <h3 class="event-card__title">Pet This Cat</h3>
+            <p class="event-card__date-time">Today at 1pm</p>
+            <p class="event-card__excerpt">These cats are all so cute. Let's pet them!</p>
+            <a href="" class="event-card__read-more">Read more</a>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <div class="event-card">
+          <img src="https://cdn.pixabay.com/photo/2018/05/30/19/29/kitten-3442257_1280.jpg" alt="A cat"
+            class="event-card__image">
+          <div class="event-card__content">
+            <h3 class="event-card__title">Pet This Cat</h3>
+            <p class="event-card__date-time">Today at 1pm</p>
+            <p class="event-card__excerpt">These cats are all so cute. Let's pet them!</p>
+            <a href="" class="event-card__read-more">Read more</a>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <div class="event-card">
+          <img src="https://cdn.pixabay.com/photo/2018/09/15/08/14/cat-3678858_1280.jpg" alt="A cat"
+            class="event-card__image">
+          <div class="event-card__content">
+            <h3 class="event-card__title">Pet This Cat</h3>
+            <p class="event-card__date-time">Today at 1pm</p>
+            <p class="event-card__excerpt">These cats are all so cute. Let's pet them!</p>
+            <a href="" class="event-card__read-more">Read more</a>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <div class="event-card">
+          <img src="https://cdn.pixabay.com/photo/2016/12/18/18/42/kittens-1916542_1280.jpg" alt="A cat"
+            class="event-card__image">
+          <div class="event-card__content">
+            <h3 class="event-card__title">Pet This Cat</h3>
+            <p class="event-card__date-time">Today at 1pm</p>
+            <p class="event-card__excerpt">These cats are all so cute. Let's pet them!</p>
+            <a href="" class="event-card__read-more">Read more</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+
+  <script>
+    const slideText = [
+      '<h1>This is a cat.</h1><p>We love this cat. It is adorable.</p>',
+      '<h1>This is a second cat.</h1><p>We love this cat. It is wonderful.</p>',
+      '<h1>This is a third cat.</h1><p>We love this cat. It is precious.</p>',
+      '<h1>This is a fourth cat.</h1><p>We love this cat. It is amazing.</p>',
+      '<h1>This is a fifth cat.</h1><p>We love this cat. It is cute.</p>',
+    ]
+
+    const slideTextDisplay = document.querySelector('#featured-content-wrapper .slide-content')
+
+    const featured = new Swiper('#featured', {
+      loop: true,
+      speed: 500,
+      navigation: {
+        nextEl: '#featured > .swiper-button-next',
+        prevEl: '#featured > .swiper-button-prev'
+      },
+      on: {
+        init: () => {
+          slideTextDisplay.innerHTML = slideText[0];
+        },
+      }
+    })
+
+    featured.on('slideChange', () => {
+      slideTextDisplay.classList.add('faded-out')
+
+      setTimeout(() => {
+        slideTextDisplay.innerHTML = slideText[featured.realIndex];
+        slideTextDisplay.classList.remove('faded-out');
+      }, 250)
+    })
+
+    const events = new Swiper('#events', {
+      speed: 500,
+      navigation: {
+        nextEl: '#events > .swiper-button-next',
+        prevEl: '#events > .swiper-button-prev',
+      },
+      pagination: {
+        el: '#events > .swiper-pagination',
+        type: 'bullets',
+      },
+      slidesPerView: 1,
+      breakpoints: {
+        900: {
+          slidesPerView: 2,
+          spaceBetween: 16
+        },
+        1300: {
+          slidesPerView: 3,
+          spaceBetween: 16,
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>
