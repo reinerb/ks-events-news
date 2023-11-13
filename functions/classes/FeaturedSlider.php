@@ -26,7 +26,6 @@ class FeaturedSlider {
 
   /**
    * Renders a Swiper slide wrapper and image slides
-   * @param string $class_name The HTML class for the list
    * @return string The markup for the slider
    */
   private function render_image_slides(): string {
@@ -42,6 +41,10 @@ class FeaturedSlider {
     return "<div class='swiper-wrapper'>" . $slides . "</div>";
   }
 
+  /**
+   * Creates a string JavaScript array of post content
+   * @return string A JavaScript array
+   */
   private function create_content_array(): string
   {
     return array_reduce(
