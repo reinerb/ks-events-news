@@ -32,7 +32,7 @@ class NewsPost {
   }
 
   /**
-   * Renders the event card
+   * Renders the news card
    * @return string HTML markup
    */
   public function render(): string {

@@ -52,6 +52,20 @@ class EventPost {
    * @return string HTML markup
    */
   public function render(): string {
-    return '';
+    $rendered_date = $this->event_time->format('l, F j, Y');
+    $rendered_time = $this->event_time->format('g:i a');
+    
+    return 
+    "
+      <div class='post-card'>
+        <img src='$this->img_url' class='post-card__image' alt='The featured image for $this->title' />
+        <div class='post-card__content'>
+          <h3 class='post-card__title'>$this->title</h3>
+          <p class='post-card__date-time'>$rendered_date at $rendered_time</p>
+          <p class='post-card__excerpt'>$this->excerpt</p>
+          <a href='$this->post_url' class='post-card__read-more'>Read More</a>
+        </div>
+      </div>
+    ";
   }
 }
