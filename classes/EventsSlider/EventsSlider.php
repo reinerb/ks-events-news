@@ -1,13 +1,13 @@
 <?php
 // Imports
 require WP_PLUGIN_DIR . "/ks-events-news/functions/find-posts.php";
-require plugin_dir_path( __FILE__ ) . "FeaturedPost.php";
+require plugin_dir_path( __FILE__ ) . "EventPost.php";
 
-class FeaturedSlider {
+class EventsSlider {
   /**
    * An array of featured posts to be displayed in the slider
    */
-  public $featured_posts;
+  public $posts;
 
   /**
    * The HTML ID for the slider
@@ -15,7 +15,7 @@ class FeaturedSlider {
   public $html_id;
 
   /**
-   * Creates a new FeaturedSlider object
+   * Creates a new EventsSlider object
    * @param string $slider_html_id The HTML ID of the rendered Swiper slider
    * @param string $category The blog category to find posts from
    * @param int $number_of_posts The number of posts to retrieve
@@ -25,14 +25,22 @@ class FeaturedSlider {
     string $slider_html_id, 
     string $category,
     int $number_of_posts,
-    array $extra_posts = []
+    string $timezone = 'America/New_York'
   ) {
+    $today = new DateTime('@' . strtotime( 'today' ), new DateTimeZone( $timezone ) );
     // Queries $query_params posts from $category
     $query_params = [
-      "category" => $category,
-      "number_of_posts" => $number_of_posts,
-      "order" => "DESC",
-      "orderby" => "date"
+      'category_name' => $category,
+      'posts_per_page' => $number_of_posts,
+      'order' => 'ASC',
+      'orderby' => 'meta_value',
+      'meta_key' => 'event_date',
+      'meta_query' => [
+        'key' => 'event_date',
+        'value' => $today->format('Y-m-d H:i:s'),
+        'type' => 'DATETIME',
+        'compare' => '>='
+      ]
     ];
     try {
       $query = find_posts( $query_params );
@@ -40,24 +48,20 @@ class FeaturedSlider {
       $query = [];  
     }
 
-    // Adds those posts onto the 
-    $this->featured_posts = $extra_posts;
+    $this->posts = array_map(function ($post) {
+      $img_url = get_the_post_thumbnail_url($post, 'full');
+      $excerpt = get_the_excerpt($post);
+      $event_date = get_post_meta($post->ID, 'event_date', true);
+      $permalink = get_permalink($post->ID);
 
-      array_map(function ( $post ) {
-        $img_url = get_the_post_thumbnail_url($post, 'full');
-        $excerpt = get_the_excerpt($post);
-        $permalink = get_permalink($post);
-        $event_date = get_post_meta($post->ID,'event_date', true);
-
-      $this->featured_posts[] = new FeaturedPost(
+      return new EventPost(
         $img_url,
         $post->post_title,
         $excerpt,
         $permalink,
-        $event_date == '' ? null : new DateTime($event_date)
+        new DateTime($event_date)
       );
-    }, $query );
-
+    }, $query);
 
     $this->html_id = $slider_html_id;
   }
@@ -66,12 +70,12 @@ class FeaturedSlider {
    * Renders a Swiper slide wrapper and image slides
    * @return string The markup for the slider
    */
-  private function render_image_slides(): string {
+  private function render_slides(): string {
     $slides = array_reduce(
-      $this->featured_posts, 
+      $this->posts, 
       function ($carry, $post) {
         return $carry . "<div class='swiper-slide'>" 
-          . $post->get_image_tag() 
+          . $post->render() 
           . "</div>";
       }, 
       "");
@@ -80,35 +84,17 @@ class FeaturedSlider {
   }
 
   /**
-   * Creates a string JavaScript array of post content
-   * @return string A JavaScript array
-   */
-  private function create_content_array(): string
-  {
-    return array_reduce(
-      $this->featured_posts,
-      function ($carry, $post) {
-        return $carry . $post->get_post_content() . ',';
-      },
-      "["
-    ) . "]";
-  }
-
-  /**
    * Renders the full Swiper slider
    */
   public function render(): string {
     $html_markup = "<div class='swiper' id='" . $this->html_id . "'>"
-      . $this->render_image_slides()
+      . $this->render_slides()
       . "<div class='swiper-button-prev'></div>"
       . "<div class='swiper-button-next'></div>"
-      . "<div class='content-wrapper'><div class='featured-content'></div></div>"
       . "</div>";
 
     $swiper_js = "
       <script>
-        const slideContent = " . $this->create_content_array() . ";
-        const featuredWrapper = document.querySelector(#" . $this->html_id . " > .featured-content);
         const  ". $this->html_id . " = new Swiper('#" . $this->html_id . "', {
           loop: true,
           speed: 500,
@@ -116,18 +102,6 @@ class FeaturedSlider {
             nextEl: '#" . $this->html_id . " > .swiper-button-next',
             prevEl: '#" . $this->html_id . " > .swiper-button-prev',
           },
-          on: {
-            init: () => {
-              featuredWrapper.innerHTML = slideContent[0],
-            },
-          }
-        });
-        " . $this->html_id . ".on('slideChange', () => {
-          featuredWrapper.classList.add('faded-out');
-          setTimeout(() => {
-            featuredWrapper.innerHTML = slideContent[" . $this->html_id .".realIndex];
-            featuredWrapper.classList.remove('faded-out');
-          }, 250);
         });
       </script>
     ";

@@ -9,6 +9,8 @@ Author URI:   https://github.com/reinerb/
 
 // Imports
 require plugin_dir_path(__FILE__) . 'functions/components.php';
+require plugin_dir_path(__FILE__) . 'classes/FeaturedSlider/FeaturedSlider.php';
+require plugin_dir_path(__FILE__) . 'classes/EventsSlider/EventsSlider.php';
 
 // Enqueue stylesheet
 function enqueue_post_display_scripts () {
@@ -19,45 +21,58 @@ function enqueue_post_display_scripts () {
 add_action('wp_enqueue_scripts', 'enqueue_post_display_scripts');
 
 // Add shortcodes
-add_shortcode('event-card-grid', 'shortcode_populate_event_card_grid');
-add_shortcode('news-card-grid', 'shortcode_populate_news_card_grid');
+add_shortcode('featured_slider', 'shortcode_generate_featured_slider');
+add_shortcode('events_slider', 'shortcode_generate_events_slider');
 
 /**
  * Generates a promoted slider at the shortcode
  * @param $atts The shortcode attributes
  * @return string The markup for the slider
  */
-function shortcode_generate_promoted_slider($atts) {
+function shortcode_generate_featured_slider($atts) {
   $sc_atts = shortcode_atts([
-    'category_name' => 'promoted',
+    'category_name' => 'featured',
     'number_of_posts' => 4,
-    'html_id' => 'promoted_slider',
+    'html_id' => 'featured_slider',
+    'cover_image_url' => 'https://keremshalom.org/wp-content/uploads/2023/04/IMG_1661-scaled.jpeg'
   ], $atts);
 
-  return populate_featured_slider(
-    $sc_atts['category_name'],
-    $sc_atts['number_of_posts'],
-    $sc_atts['html_id']
+  $cover_post = new FeaturedPost(
+    $sc_atts['cover_image_url'],
+    'Welcome to Kerem Shalom!',
+    'We are a vibrant, inclusive, progressive Jewish community located in Concord, MA.',
+    'https://keremshalom.org/current-events/join-ks-for-shabbat-services/'
   );
+
+  $slider = new FeaturedSlider(
+    $sc_atts['html_id'], 
+    $sc_atts['category'], 
+    $sc_atts['number_of_posts'],
+    [$cover_post]
+  );
+
+  return $slider->render();
 }
 
 /**
- * Generates a populated events slider at the shortcode
+ * Generates an events slider at the shortcode
  * @param $atts The shortcode attributes
  * @return string The markup for the slider
  */
-function shortcode_populate_events_slider ($atts) {
+function shortcode_generate_events_slider ($atts) {
   $sc_atts = shortcode_atts([
-    'number_of_posts' => 6,
     'category_name' => 'upcoming-events',
-    'class_name' => 'upcoming-events'
+    'number_of_posts' => 6,
+    'html_id' => 'upcoming-events'
   ], $atts);
 
-  return populate_events_slider(
-    $sc_atts['category_name'], 
+  $slider = new EventsSlider(
+    $sc_atts['html_id'],
+    $sc_atts['category'],
     $sc_atts['number_of_posts'],
-    $sc_atts['class_name']
   );
+
+  return $slider->render();
 }
 
 /**
