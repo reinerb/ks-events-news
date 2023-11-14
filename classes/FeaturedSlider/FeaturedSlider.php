@@ -1,4 +1,6 @@
 <?php
+// Imports
+require WP_PLUGIN_DIR . "/ks-events-news/functions/find-posts.php";
 require plugin_dir_path( __FILE__ ) . "FeaturedPost.php";
 
 class FeaturedSlider {
@@ -14,14 +16,50 @@ class FeaturedSlider {
 
   /**
    * Creates a new FeaturedSlider object
-   * @param array $featured_posts A FeaturedPost[]
+   * @param string $slider_html_id The HTML ID of the rendered Swiper slider
+   * @param string $category The blog category to find posts from
+   * @param int $number_of_posts The number of posts to retrieve
+   * @param array $extra_posts Any extra posts, of class FeaturedPost
    */
   public function __construct(
-    array $featured_posts,
-    string $slider_id) 
-  {
-    $this->featured_posts = $featured_posts;
-    $this->html_id = $slider_id;
+    string $slider_html_id, 
+    string $category,
+    int $number_of_posts,
+    array $extra_posts = []
+  ) {
+    // Queries $query_params posts from $category
+    $query_params = [
+      "category" => $category,
+      "number_of_posts" => $number_of_posts,
+      "order" => "DESC",
+      "orderby" => "date"
+    ];
+    try {
+      $query = find_posts( $query_params );
+    } catch ( Exception $e ) {
+      $query = [];  
+    }
+
+    // Adds those posts onto the 
+    $this->featured_posts = $extra_posts;
+
+      array_map(function ( $post ) {
+        $img_url = get_the_post_thumbnail_url($post, 'full');
+        $excerpt = get_the_excerpt($post);
+        $permalink = get_permalink($post);
+        $event_date = get_post_meta($post->ID,'event_date', true);
+
+      $this->featured_posts[] = new FeaturedPost(
+        $img_url,
+        $post->post_title,
+        $excerpt,
+        $permalink,
+        $event_date == '' ? null : $event_date
+      );
+    }, $query );
+
+
+    $this->html_id = $slider_html_id;
   }
 
   /**
