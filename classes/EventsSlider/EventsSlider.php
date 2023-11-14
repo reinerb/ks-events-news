@@ -80,27 +80,31 @@ class EventsSlider {
       }, 
       "");
 
-    return "<div class='swiper-wrapper'>" . $slides . "</div>";
+    return "<div class='swiper-wrapper'>$slides</div>";
   }
 
   /**
    * Renders the full Swiper slider
    */
   public function render(): string {
-    $html_markup = "<div class='swiper' id='" . $this->html_id . "'>"
-      . $this->render_slides()
-      . "<div class='swiper-button-prev'></div>"
-      . "<div class='swiper-button-next'></div>"
-      . "</div>";
+    $slides = $this->render_slides();
+
+    $html_markup = "
+      <div class='swiper' id='$this->html_id'>
+        $slides
+        <div class='swiper-button-prev'></div>
+        <div class='swiper-button-next'></div>
+      </div>
+    ";
 
     $swiper_js = "
       <script>
-        const  ". $this->html_id . " = new Swiper('#" . $this->html_id . "', {
+        const $this->html_id = new Swiper('#$this->html_id', {
           loop: true,
           speed: 500,
           navigation: {
-            nextEl: '#" . $this->html_id . " > .swiper-button-next',
-            prevEl: '#" . $this->html_id . " > .swiper-button-prev',
+            nextEl: '#$this->html_id > .swiper-button-next',
+            prevEl: '#$this->html_id > .swiper-button-prev',
           },
         });
       </script>

@@ -59,8 +59,11 @@ class NewsGrid {
       ""
     );
 
-    return "<div class='post-grid $class_name'>" 
-     . $cards
-     . "</div>";
+    return 
+    "
+      <div class='post-grid $class_name'> 
+        $cards
+      </div>
+    ";
   }
 }

@@ -53,15 +53,8 @@ class FeaturedPost {
    * @param string $html_id The HTML ID
    * @return string An HTML image tag
    */
-  public function get_image_tag(
-    string $class_name = 'featured-slider__image', 
-    string $html_id = ''
-  ): string {
-    return "<img src='" 
-      . $this->img_url 
-      . "' class='$class_name' " 
-      . ($html_id == '' ? '' : "id='$html_id' ") 
-      . "/>";
+  public function render_image(): string {
+    return "<img src='$this->img_url' class='slider-image' />";
   }
 
   /**
@@ -70,22 +63,24 @@ class FeaturedPost {
    * @param string $html_id The HTML ID
    * @return string HTML markup
    */
-  public function get_post_content(
-    string $class_name = 'featured-content'
-  ): string {
+  public function render_content(): string {
     if ($this->event_time == null) {
       $rendered_date_time = '';
     } else {
       $rendered_date = $this->event_time->format('l, F j, Y');
       $rendered_time = $this->event_time->format('g:i a');
-      $rendered_date_time = "<p class='" 
-        . $class_name 
-        . "__date-time>$rendered_date at $rendered_time</p>";
+      $rendered_date_time = "
+        <p class='featured-content__date-time>
+          $rendered_date at $rendered_time
+        </p>
+      ";
     }
 
-    return "<h3 class='" . $class_name . "__title'>" . $this->title . "</h3>"
-      . $rendered_date_time
-      . "<p class='" . $class_name . "__excerpt'>" . $this->excerpt . "</p>"
-      . "<a href='" . $this->post_url . "' class='" . $class_name . "'>Read more</a>";
+    return "
+      <h3 class='featured-content__title'>$this->title</h3>
+      $rendered_date_time
+      <p class='featured-content__excerpt'>$this->excerpt</p>
+      <a href='$this->post_url' class='featured-content__button'>Read more</a>
+    ";
   }
 }
