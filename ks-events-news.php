@@ -2,15 +2,15 @@
 /*
 Plugin Name:  Kerem Shalom Events and News
 Description:  Displays all events and news at Kerem Shalom.
-Version:      0.1
+Version:      0.5
 Author:       Benjamin Reiner
-Author URI:   https://github.com/reinerb/
+Author URI:   https://btreiner.com/
 */
 
 // Imports
-require plugin_dir_path(__FILE__) . 'functions/components.php';
 require plugin_dir_path(__FILE__) . 'classes/FeaturedSlider/FeaturedSlider.php';
 require plugin_dir_path(__FILE__) . 'classes/EventsSlider/EventsSlider.php';
+require plugin_dir_path(__FILE__) . 'classes/NewsGrid/NewsGrid.php';
 
 // Enqueue stylesheet
 function enqueue_post_display_scripts () {
@@ -77,19 +77,20 @@ function shortcode_generate_events_slider ($atts) {
 
 /**
  * Generates a populated card grid at the shortcode
- * @param $atts The shortcode attributes
+ * @param array $atts The shortcode attributes
  * @return string The markup for the grid
  */
-function shortcode_populate_news_card_grid ($atts) {
+function shortcode_generate_news_grid (array $atts) {
   $sc_atts = shortcode_atts([
     'number_of_posts' => 6,
     'category_name' => 'homepage-news',
-    'class_name' => 'homepage-news'
+    'class_name' => ''
   ], $atts);
 
-  return populate_news_card_grid(
-    $sc_atts['category_name'], 
-    $sc_atts['number_of_posts'],
-    $sc_atts['class_name']
+  $news_grid = new NewsGrid(
+    $sc_atts['category_name'],
+    $sc_atts['number_of_posts']
   );
+
+  return $news_grid->render($sc_atts['class_name']);
 }
