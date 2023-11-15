@@ -9,11 +9,13 @@ Author URI:   https://btreiner.com/
 
 // Imports
 require plugin_dir_path(__FILE__) . 'classes/FeaturedSlider/FeaturedSlider.php';
+require plugin_dir_path(__FILE__) . 'classes/FeaturedSlider/CoverPost.php';
 require plugin_dir_path(__FILE__) . 'classes/EventsSlider/EventsSlider.php';
 require plugin_dir_path(__FILE__) . 'classes/NewsGrid/NewsGrid.php';
 
 // Enqueue stylesheet
-function enqueue_post_display_scripts () {
+function enqueue_post_display_scripts()
+{
   wp_enqueue_style('swiper-css', plugin_dir_url(__FILE__) . 'css/swiper-bundle.min.css');
   wp_enqueue_style('news_post_display', plugin_dir_url(__FILE__) . 'css/news-posts.css');
   wp_enqueue_script('swiper-scripts', plugin_dir_url(__FILE__) . 'js/swiper-bundle.min.js');
@@ -29,26 +31,32 @@ add_shortcode('events_slider', 'shortcode_generate_events_slider');
  * @param $atts The shortcode attributes
  * @return string The markup for the slider
  */
-function shortcode_generate_featured_slider($atts) {
+function shortcode_generate_featured_slider($atts)
+{
   $sc_atts = shortcode_atts([
     'category_name' => 'featured',
     'number_of_posts' => 4,
     'html_id' => 'featured_slider',
-    'cover_image_url' => 'https://keremshalom.org/wp-content/uploads/2023/04/IMG_1661-scaled.jpeg'
+    'cover_image_url' => 'https://keremshalom.org/wp-content/uploads/2023/04/IMG_1661-scaled.jpeg',
+    'cover_title' => 'Welcome to Kerem Shalom!',
+    'cover_content' => 'We are a vibrant, inclusive, progressive Jewish community located in Concord, MA.',
+    'cover_button_text' => 'Join Us for Shabbat!',
+    'cover_button_url' => 'https://keremshalom.org/current-events/join-ks-for-shabbat-services/'
   ], $atts);
 
-  $cover_post = new FeaturedPost(
+  $cover_post = new CoverPost(
     $sc_atts['cover_image_url'],
-    'Welcome to Kerem Shalom!',
-    'We are a vibrant, inclusive, progressive Jewish community located in Concord, MA.',
-    'https://keremshalom.org/current-events/join-ks-for-shabbat-services/'
+    $sc_atts['cover_title'],
+    $sc_atts['cover_content'],
+    $sc_atts['cover_button_text'],
+    $sc_atts['cover_button_url'],
   );
 
   $slider = new FeaturedSlider(
-    $sc_atts['html_id'], 
-    $sc_atts['category'], 
+    $sc_atts['html_id'],
+    $sc_atts['category'],
     $sc_atts['number_of_posts'],
-    [$cover_post]
+    $cover_post
   );
 
   return $slider->render();
@@ -59,7 +67,8 @@ function shortcode_generate_featured_slider($atts) {
  * @param $atts The shortcode attributes
  * @return string The markup for the slider
  */
-function shortcode_generate_events_slider ($atts) {
+function shortcode_generate_events_slider($atts)
+{
   $sc_atts = shortcode_atts([
     'category_name' => 'upcoming-events',
     'number_of_posts' => 6,
@@ -80,7 +89,8 @@ function shortcode_generate_events_slider ($atts) {
  * @param array $atts The shortcode attributes
  * @return string The markup for the grid
  */
-function shortcode_generate_news_grid (array $atts) {
+function shortcode_generate_news_grid(array $atts)
+{
   $sc_atts = shortcode_atts([
     'number_of_posts' => 6,
     'category_name' => 'homepage-news',
