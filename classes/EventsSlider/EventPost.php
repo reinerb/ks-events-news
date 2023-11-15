@@ -1,5 +1,6 @@
 <?php
-class EventPost {
+class EventPost
+{
   /**
    * The URL of the featured image
    */
@@ -24,7 +25,7 @@ class EventPost {
    * The event time (optional)
    */
   public $event_time;
-  
+
   /**
    * Creates a new FeaturedPost instance
    * @param string $img_url The URL of the featured image
@@ -34,12 +35,12 @@ class EventPost {
    * @param DateTime $event_time The event time
    */
   public function __construct(
-    string $img_url, 
-    string $title, 
-    string $excerpt, 
-    string $post_url, 
-    DateTime $event_time) 
-  {
+    string $img_url,
+    string $title,
+    string $excerpt,
+    string $post_url,
+    DateTime $event_time
+  ) {
     $this->img_url = $img_url;
     $this->title = $title;
     $this->excerpt = $excerpt;
@@ -51,12 +52,13 @@ class EventPost {
    * Renders the event card
    * @return string HTML markup
    */
-  public function render(): string {
+  public function render(): string
+  {
     $rendered_date = $this->event_time->format('l, F j, Y');
     $rendered_time = $this->event_time->format('g:i a');
-    
-    return 
-    "
+
+    return
+      "
       <div class='post-card'>
         <img src='$this->img_url' class='post-card__image' alt='The featured image for $this->title' />
         <div class='post-card__content'>

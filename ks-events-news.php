@@ -8,10 +8,10 @@ Author URI:   https://btreiner.com/
 */
 
 // Imports
-require plugin_dir_path(__FILE__) . 'classes/FeaturedSlider/FeaturedSlider.php';
-require plugin_dir_path(__FILE__) . 'classes/FeaturedSlider/CoverPost.php';
-require plugin_dir_path(__FILE__) . 'classes/EventsSlider/EventsSlider.php';
-require plugin_dir_path(__FILE__) . 'classes/NewsGrid/NewsGrid.php';
+require_once plugin_dir_path(__FILE__) . 'classes/FeaturedSlider/FeaturedSlider.php';
+require_once plugin_dir_path(__FILE__) . 'classes/FeaturedSlider/CoverPost.php';
+require_once plugin_dir_path(__FILE__) . 'classes/EventsSlider/EventsSlider.php';
+require_once plugin_dir_path(__FILE__) . 'classes/NewsGrid/NewsGrid.php';
 
 // Enqueue stylesheet
 function enqueue_post_display_scripts()

@@ -1,8 +1,8 @@
 <?php
 // Imports
-require WP_PLUGIN_DIR . "/ks-events-news/functions/find-posts.php";
-require plugin_dir_path(__FILE__) . "FeaturedPost.php";
-require plugin_dir_path(__FILE__) . "CoverPost.php";
+require_once WP_PLUGIN_DIR . "/ks-events-news/functions/find-posts.php";
+require_once plugin_dir_path(__FILE__) . "FeaturedPost.php";
+require_once plugin_dir_path(__FILE__) . "CoverPost.php";
 
 class FeaturedSlider
 {

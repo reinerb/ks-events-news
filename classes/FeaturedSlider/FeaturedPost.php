@@ -1,5 +1,6 @@
 <?php
-class FeaturedPost {
+class FeaturedPost
+{
   /**
    * The URL of the featured image
    */
@@ -24,7 +25,7 @@ class FeaturedPost {
    * The event time (optional)
    */
   public $event_time;
-  
+
   /**
    * Creates a new FeaturedPost instance
    * @param string $img_url The URL of the featured image
@@ -34,10 +35,10 @@ class FeaturedPost {
    * @param DateTime|null $event_time The event time (optional)
    */
   public function __construct(
-    string $img_url, 
-    string $title, 
-    string $excerpt, 
-    string $post_url, 
+    string $img_url,
+    string $title,
+    string $excerpt,
+    string $post_url,
     DateTime $event_time = null
   ) {
     $this->img_url = $img_url;
@@ -53,7 +54,8 @@ class FeaturedPost {
    * @param string $html_id The HTML ID
    * @return string An HTML image tag
    */
-  public function render_image(): string {
+  public function render_image(): string
+  {
     return "<img src='$this->img_url' class='slider-image' />";
   }
 
@@ -63,7 +65,8 @@ class FeaturedPost {
    * @param string $html_id The HTML ID
    * @return string HTML markup
    */
-  public function render_content(): string {
+  public function render_content(): string
+  {
     if ($this->event_time == null) {
       $rendered_date_time = '';
     } else {

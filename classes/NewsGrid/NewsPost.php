@@ -1,5 +1,6 @@
 <?php
-class NewsPost {
+class NewsPost
+{
   /**
    * The URL of the featured image
    */
@@ -14,7 +15,7 @@ class NewsPost {
    * The permalink to the post
    */
   public $post_url;
-  
+
   /**
    * Creates a new NewsPost instance
    * @param string $img_url The URL of the featured image
@@ -22,8 +23,8 @@ class NewsPost {
    * @param string $post_url The permalink to the post
    */
   public function __construct(
-    string $img_url, 
-    string $title, 
+    string $img_url,
+    string $title,
     string $post_url,
   ) {
     $this->img_url = $img_url;
@@ -35,9 +36,10 @@ class NewsPost {
    * Renders the news card
    * @return string HTML markup
    */
-  public function render(): string {
-    return 
-    "
+  public function render(): string
+  {
+    return
+      "
       <div class='post-card'>
         <img src='$this->img_url' class='post-card__image' alt='The featured image for $this->title' />
         <div class='post-card__content'>

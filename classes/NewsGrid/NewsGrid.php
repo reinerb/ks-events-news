@@ -1,9 +1,10 @@
 <?php
 // Imports
-require WP_PLUGIN_DIR . "/ks-events-news/functions/find-posts.php";
-require plugin_dir_path( __FILE__ ) . "NewsPost.php";
+require_once WP_PLUGIN_DIR . "/ks-events-news/functions/find-posts.php";
+require_once plugin_dir_path(__FILE__) . "NewsPost.php";
 
-class NewsGrid {
+class NewsGrid
+{
   /**
    * An array of posts
    */
@@ -28,9 +29,9 @@ class NewsGrid {
       'orderby' => 'date',
     ];
     try {
-      $query = find_posts( $query_params );
-    } catch ( Exception $e ) {
-      $query = [];  
+      $query = find_posts($query_params);
+    } catch (Exception $e) {
+      $query = [];
     }
 
     $this->posts = array_map(function ($post) {
@@ -50,7 +51,8 @@ class NewsGrid {
    * @param string $class_name An optional HTML class string
    * @return string HTML markup
    */
-  public function render(string $class_name = '') {
+  public function render(string $class_name = '')
+  {
     $cards = array_reduce(
       $this->posts,
       function ($carry, $post) {
@@ -59,8 +61,8 @@ class NewsGrid {
       ""
     );
 
-    return 
-    "
+    return
+      "
       <div class='post-grid $class_name'> 
         $cards
       </div>

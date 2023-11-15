@@ -1,9 +1,10 @@
 <?php
 // Imports
-require WP_PLUGIN_DIR . "/ks-events-news/functions/find-posts.php";
-require plugin_dir_path( __FILE__ ) . "EventPost.php";
+require_once WP_PLUGIN_DIR . "/ks-events-news/functions/find-posts.php";
+require_once plugin_dir_path(__FILE__) . "EventPost.php";
 
-class EventsSlider {
+class EventsSlider
+{
   /**
    * An array of featured posts to be displayed in the slider
    */
@@ -22,12 +23,12 @@ class EventsSlider {
    * @param array $extra_posts Any extra posts, of class FeaturedPost
    */
   public function __construct(
-    string $slider_html_id, 
+    string $slider_html_id,
     string $category,
     int $number_of_posts,
     string $timezone = 'America/New_York'
   ) {
-    $today = new DateTime('@' . strtotime( 'today' ), new DateTimeZone( $timezone ) );
+    $today = new DateTime('@' . strtotime('today'), new DateTimeZone($timezone));
     // Queries $query_params posts from $category
     $query_params = [
       'category_name' => $category,
@@ -43,9 +44,9 @@ class EventsSlider {
       ]
     ];
     try {
-      $query = find_posts( $query_params );
-    } catch ( Exception $e ) {
-      $query = [];  
+      $query = find_posts($query_params);
+    } catch (Exception $e) {
+      $query = [];
     }
 
     $this->posts = array_map(function ($post) {
@@ -70,15 +71,17 @@ class EventsSlider {
    * Renders a Swiper slide wrapper and image slides
    * @return string The markup for the slider
    */
-  private function render_slides(): string {
+  private function render_slides(): string
+  {
     $slides = array_reduce(
-      $this->posts, 
+      $this->posts,
       function ($carry, $post) {
-        return $carry . "<div class='swiper-slide'>" 
-          . $post->render() 
+        return $carry . "<div class='swiper-slide'>"
+          . $post->render()
           . "</div>";
-      }, 
-      "");
+      },
+      ""
+    );
 
     return "<div class='swiper-wrapper'>$slides</div>";
   }
@@ -86,7 +89,8 @@ class EventsSlider {
   /**
    * Renders the full Swiper slider
    */
-  public function render(): string {
+  public function render(): string
+  {
     $slides = $this->render_slides();
 
     $html_markup = "
@@ -109,7 +113,7 @@ class EventsSlider {
         });
       </script>
     ";
-    
+
     return $html_markup . $swiper_js;
   }
 }
