@@ -25,6 +25,7 @@ add_action('wp_enqueue_scripts', 'enqueue_post_display_scripts');
 // Add shortcodes
 add_shortcode('featured_slider', 'shortcode_generate_featured_slider');
 add_shortcode('events_slider', 'shortcode_generate_events_slider');
+add_shortcode('news_grid', 'shortcode_generate_news_grid');
 
 /**
  * Generates a promoted slider at the shortcode
