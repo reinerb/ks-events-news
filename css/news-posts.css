@@ -42,7 +42,7 @@
   font-style: italic;
 }
 
-.post-card__read-more {
+.post-card__button {
   align-self: center;
   margin-top: auto;
   font-weight: 700;
@@ -53,7 +53,7 @@
   transition: background-color 300ms ease;
 }
 
-.post-card__read-more:hover {
+.post-card__button:hover {
   background-color: var(--button-hover-bg);
 }
 
@@ -71,10 +71,6 @@
 /* Responsive */
 
 @media screen and (max-width: 900px) {
-  .next-sunday {
-    grid-template-columns: 1fr;
-  }
-
   .card-grid {
     --grid-columns: 1;
   }

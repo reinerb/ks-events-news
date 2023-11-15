@@ -5,7 +5,7 @@
  * @param array $query_params The query parameters
  * @return array An array of WordPress posts
  */
-function find_posts(array $query_params)
+function ks_find_posts(array $query_params)
 {
   $query = new WP_QUERY($query_params);
 

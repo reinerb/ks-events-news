@@ -44,7 +44,7 @@ class EventsSlider
       ]
     ];
     try {
-      $query = find_posts($query_params);
+      $query = ks_find_posts($query_params);
     } catch (Exception $e) {
       $query = [];
     }
@@ -104,11 +104,21 @@ class EventsSlider
     $swiper_js = "
       <script>
         const $this->html_id = new Swiper('#$this->html_id', {
-          loop: true,
           speed: 500,
           navigation: {
             nextEl: '#$this->html_id > .swiper-button-next',
             prevEl: '#$this->html_id > .swiper-button-prev',
+          },
+          slidesPerView: 1,
+          breakpoints: {
+            900: {
+              slidesPerView: 2,
+              spaceBetween: 16,
+            },
+            1300: {
+              slidesPerView: 3,
+              spaceBetween: 16,
+            },
           },
         });
       </script>

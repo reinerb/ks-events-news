@@ -39,14 +39,12 @@ class NewsPost
   public function render(): string
   {
     return
-      "
-      <div class='post-card'>
+      "<div class='post-card'>
         <img src='$this->img_url' class='post-card__image' alt='The featured image for $this->title' />
         <div class='post-card__content'>
           <h3 class='post-card__title'>$this->title</h3>
           <a href='$this->post_url' class='post-card__read-more'>Read More</a>
         </div>
-      </div>
-    ";
+      </div>";
   }
 }

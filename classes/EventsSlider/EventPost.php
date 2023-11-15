@@ -65,7 +65,7 @@ class EventPost
           <h3 class='post-card__title'>$this->title</h3>
           <p class='post-card__date-time'>$rendered_date at $rendered_time</p>
           <p class='post-card__excerpt'>$this->excerpt</p>
-          <a href='$this->post_url' class='post-card__read-more'>Read More</a>
+          <a href='$this->post_url' class='post-card__button'>Read More</a>
         </div>
       </div>
     ";

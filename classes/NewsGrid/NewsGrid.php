@@ -29,7 +29,7 @@ class NewsGrid
       'orderby' => 'date',
     ];
     try {
-      $query = find_posts($query_params);
+      $query = ks_find_posts($query_params);
     } catch (Exception $e) {
       $query = [];
     }
