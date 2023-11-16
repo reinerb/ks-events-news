@@ -53,6 +53,11 @@ class NewsGrid
    */
   public function render(string $class_name = '')
   {
+    // Handle empty post list
+    if (count($this->posts) == 0) {
+      return "<p>Sorry, this category doesn't contain any posts.</p>";
+    }
+
     $cards = array_reduce(
       $this->posts,
       function ($carry, $post) {

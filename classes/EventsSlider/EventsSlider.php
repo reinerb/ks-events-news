@@ -91,6 +91,11 @@ class EventsSlider
    */
   public function render(): string
   {
+    // Handle empty post list
+    if (count($this->posts) == 0) {
+      return "<p>Sorry, this category doesn't contain any posts.</p>";
+    }
+
     $slides = $this->render_slides();
 
     $html_markup = "
