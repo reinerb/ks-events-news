@@ -13,6 +13,7 @@ require_once plugin_dir_path(__FILE__) . 'classes/FeaturedSlider/CoverPost.php';
 require_once plugin_dir_path(__FILE__) . 'classes/EventsSlider/EventsSlider.php';
 require_once plugin_dir_path(__FILE__) . 'classes/NewsGrid/NewsGrid.php';
 require_once plugin_dir_path(__FILE__) . 'classes/PhotoLinks/PhotoLink.php';
+require_once plugin_dir_path(__FILE__) . 'classes/ShabbatService/ShabbatService.php';
 
 // Enqueue stylesheet
 function enqueue_post_display_scripts()
@@ -28,6 +29,7 @@ add_shortcode('featured_slider', 'shortcode_generate_featured_slider');
 add_shortcode('events_slider', 'shortcode_generate_events_slider');
 add_shortcode('news_grid', 'shortcode_generate_news_grid');
 add_shortcode('photo_link', 'shortcode_generate_photo_link');
+add_shortcode('shabbat', 'shortcode_generate_shabbat_service');
 
 /**
  * Generates a promoted slider at the shortcode
@@ -132,4 +134,15 @@ function shortcode_generate_photo_link($atts): string
   );
 
   return $photo_link->render();
+}
+
+/**
+ * Generates a Shabbat service at the shortcode
+ * @return string HTML markup
+ */
+function shortcode_generate_shabbat_service(): string
+{
+  $shabbat = new ShabbatService();
+
+  return $shabbat->render();
 }
