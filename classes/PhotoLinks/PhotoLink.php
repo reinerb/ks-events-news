@@ -53,7 +53,7 @@ class PhotoLink
    * Renders the PhotoLink
    * @return string HTML markup
    */
-  public function render()
+  public function render(): string
   {
     return "
       <a class='photo-link' href='$this->url'>

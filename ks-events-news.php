@@ -12,6 +12,7 @@ require_once plugin_dir_path(__FILE__) . 'classes/FeaturedSlider/FeaturedSlider.
 require_once plugin_dir_path(__FILE__) . 'classes/FeaturedSlider/CoverPost.php';
 require_once plugin_dir_path(__FILE__) . 'classes/EventsSlider/EventsSlider.php';
 require_once plugin_dir_path(__FILE__) . 'classes/NewsGrid/NewsGrid.php';
+require_once plugin_dir_path(__FILE__) . 'classes/PhotoLinks/PhotoLink.php';
 
 // Enqueue stylesheet
 function enqueue_post_display_scripts()
@@ -26,13 +27,14 @@ add_action('wp_enqueue_scripts', 'enqueue_post_display_scripts');
 add_shortcode('featured_slider', 'shortcode_generate_featured_slider');
 add_shortcode('events_slider', 'shortcode_generate_events_slider');
 add_shortcode('news_grid', 'shortcode_generate_news_grid');
+add_shortcode('photo_link', 'shortcode_generate_photo_link');
 
 /**
  * Generates a promoted slider at the shortcode
  * @param $atts The shortcode attributes
  * @return string The markup for the slider
  */
-function shortcode_generate_featured_slider($atts)
+function shortcode_generate_featured_slider($atts): string
 {
   $sc_atts = shortcode_atts([
     'category_name' => 'featured',
@@ -68,7 +70,7 @@ function shortcode_generate_featured_slider($atts)
  * @param $atts The shortcode attributes
  * @return string The markup for the slider
  */
-function shortcode_generate_events_slider($atts)
+function shortcode_generate_events_slider($atts): string
 {
   $sc_atts = shortcode_atts([
     'category_name' => 'upcoming-events',
@@ -90,7 +92,7 @@ function shortcode_generate_events_slider($atts)
  * @param array $atts The shortcode attributes
  * @return string The markup for the grid
  */
-function shortcode_generate_news_grid(array $atts)
+function shortcode_generate_news_grid(array $atts): string
 {
   $sc_atts = shortcode_atts([
     'number_of_posts' => 6,
@@ -104,4 +106,30 @@ function shortcode_generate_news_grid(array $atts)
   );
 
   return $news_grid->render($sc_atts['class_name']);
+}
+
+/**
+ * Generates a photo link at the shortcode
+ * @param array $atts The shortcode attributes
+ * @return string HTML markup
+ */
+function shortcode_generate_photo_link($atts): string
+{
+  $sc_atts = shortcode_atts([
+    'title_text' => '',
+    'body_text' => '',
+    'href' => '#',
+    'img_src' => '#',
+    'img_alt' => '',
+  ], $atts);
+
+  $photo_link = new PhotoLink(
+    $sc_atts['title_text'],
+    $sc_atts['body_text'],
+    $sc_atts['href'],
+    $sc_atts['img_url'],
+    $sc_atts['img_alt']
+  );
+
+  return $photo_link->render();
 }
