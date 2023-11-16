@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name:  Kerem Shalom Events and News
+Plugin Name:  Kerem Shalom Homepage
 Description:  Displays all events and news at Kerem Shalom.
 Version:      0.5
 Author:       Benjamin Reiner
