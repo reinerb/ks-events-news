@@ -62,8 +62,8 @@ class PhotoLink
           <h3 class='photo-link__title'>$this->title_text</h3>
         </div>
         <div class='photo-link__content__hover'>
-          <h3 class='photo-link__title>$this->title_text</h3>
-          <p class=''photo-link__body>$this->body_text</p>
+          <h3 class='photo-link__title__hover>$this->title_text</h3>
+          <p class=''photo-link__body__hover>$this->body_text</p>
         </div>
       </a>
     ";
