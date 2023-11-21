@@ -24,10 +24,18 @@
   height: 100%;
 }
 
-/* Featured slider overlay */
+/* Featured slider */
+
+#featured {
+  --aspect-ratio: 2.5;
+}
+
+#featured.swiper {
+  aspect-ratio: var(--aspect-ratio);
+}
 
 #featured .swiper-slide img {
-  aspect-ratio: 16 / 10;
+  aspect-ratio: var(--aspect-ratio);
   object-fit: cover;
 }
 
@@ -57,6 +65,30 @@
 
 .featured-content__date-time {
   font-style: italic;
+}
+
+@media screen and (max-width: 900px) {
+  .swiper .content-wrapper {
+    width: 100%;
+    max-width: none;
+    right: 0;
+  }
+
+  #featured {
+    --aspect-ratio: 2;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  #featured {
+    --aspect-ratio: 1.5;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #featured {
+    --aspect-ratio: 1;
+  }
 }
 
 /* Cards */

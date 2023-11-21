@@ -1,0 +1,70 @@
+:root {
+  --shabbat-btn-bg: #ffffff;
+  --shabbat-btn-bg-hover: #e0e0e0;
+  --shabbat-btn-text: #1c68a6;
+}
+
+.shabbat_service {
+  display: grid;
+  grid-template-columns: clamp(150px, 30%, 250px) 1fr;
+  place-items: start center;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1440px;
+  height: 100%;
+}
+
+.shabbat_service__image {
+  justify-self: center;
+  width: 100%;
+}
+
+.shabbat_service__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-inline: 1rem;
+  width: 100%;
+  height: 100%;
+}
+
+.shabbat_service__content > * {
+  margin: 0;
+  padding: 0;
+}
+
+.shabbat_service__date-time {
+  font-style: italic;
+  font-size: 1.125rem;
+}
+
+.shabbat_service__excerpt {
+  margin-bottom: 1rem;
+}
+
+.shabbat_service__button {
+  align-self: center;
+  margin-top: auto;
+  font-weight: 700;
+  color: var(--shabbat-btn-text);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  background-color: var(--shabbat-btn-bg);
+  transition: background-color 300ms ease;
+}
+
+.shabbat_service__button:hover {
+  background-color: var(--shabbat-btn-bg-hover);
+}
+
+@media screen and (max-width: 600px) {
+  .shabbat-service {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (min-width: 901px) and (max-width: 1200px) {
+  .shabbat-service {
+    grid-template-columns: 1fr;
+  }
+}
