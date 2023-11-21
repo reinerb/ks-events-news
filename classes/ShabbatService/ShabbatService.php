@@ -37,7 +37,7 @@ class ShabbatService
     $today = new DateTime('@' . strtotime('today'), new DateTimeZone($timezone));
 
     $query_params = [
-      'post_type' => 'shabbat',
+      'post_type' => 'service',
       'posts_per_page' => 1,
       'order' => 'ASC',
       'orderby' => 'meta_value',
@@ -50,7 +50,16 @@ class ShabbatService
       ]
     ];
 
-    $post = ks_find_posts($query_params)[0];
+    try {
+      $post = ks_find_posts($query_params)[0];
+    } catch (Exception $e) {
+      $this->img_url = null;
+      $this->title = null;
+      $this->excerpt = null;
+      $this->event_time = null;
+      $this->post_url = null;
+      return;
+    }
 
     $this->img_url = get_the_post_thumbnail_url($post, 'full');
     $this->title = $post->post_title;
@@ -65,6 +74,10 @@ class ShabbatService
    */
   public function render(): string
   {
+    if ($this->title = null) {
+      return "<p>Sorry, no upcoming services were found.</p>";
+    }
+
     $rendered_date = $this->event_time->format("l, F j, Y");
     $rendered_time = $this->event_time->format("g:i a");
 

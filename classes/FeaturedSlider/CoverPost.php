@@ -65,7 +65,7 @@ class CoverPost
   {
     return
       "
-      <h3 class='featured-content__title'>$this->heading</h3>
+      <h1 class='featured-content__title'>$this->heading</h1>
       <p class='featured-content__excerpt'>$this->body</p>
       <a href='$this->button_url' class='featured-content__button'>$this->button_text</a>
     ";
