@@ -63,7 +63,7 @@ class FeaturedSlider
         $post->post_title,
         $excerpt,
         $permalink,
-        $event_date
+        new DateTime($event_date)
       );
     }, $query);
 
