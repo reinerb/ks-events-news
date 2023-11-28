@@ -21,7 +21,7 @@
 }
 
 .swiper-slide {
-  height: 100%;
+  height: auto;
 }
 
 /* Featured slider */
