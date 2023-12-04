@@ -4,9 +4,12 @@
   --btn-dark-bg: #193e61;
   --btn-dark-bg-hover: #184a74;
   --btn-dark-text: #ffffff;
-  --btn-light-bg: #8ec3eb;
-  --btn-light-bg-hover: #c3def4;
-  --btn-light-text: #112840;
+  /* --btn-light-bg: #8ec3eb;
+  --btn-light-bg-hover: #c3def4; */
+  --btn-light-bg: #ffffff;
+  --btn-light-bg-hover: #e0e0e0;
+  /* --btn-light-text: #112840; */
+  --btn-light-text: #1c68a6;
 }
 
 .faded-out {
@@ -128,7 +131,8 @@
   font-style: italic;
 }
 
-.post-card__button {
+.post-card__button,
+.featured-content__button {
   align-self: center;
   margin-top: auto;
   font-weight: 700;
