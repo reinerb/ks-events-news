@@ -47,7 +47,7 @@
   width: 40%;
   max-width: 350px;
   padding: 1rem 2rem;
-  background-color: var(--card-bg);
+  background-color: var(--wrapper-bg);
   z-index: 5;
 }
 
