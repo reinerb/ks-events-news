@@ -79,6 +79,8 @@ class FeaturedPost
       ";
     }
 
-    return "\"<h3 class='featured-content__title'>$this->title</h3>$rendered_date_time<p class='featured-content__excerpt'>$this->excerpt</p><a href='$this->post_url' class='featured-content__button'>Read more</a>\",";
+    $stripped_excerpt = wp_filter_nohtml_kses($this->excerpt);
+
+    return "\"<h3 class='featured-content__title'>$this->title</h3>$rendered_date_time<p class='featured-content__excerpt'>$stripped_excerpt</p><a href='$this->post_url' class='featured-content__button'>Read more</a>\",";
   }
 }
