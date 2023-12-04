@@ -105,7 +105,7 @@ function shortcode_generate_news_grid($atts): string
 {
   $sc_atts = shortcode_atts([
     'number_of_posts' => 6,
-    'category_name' => 'homepage-news',
+    'category_name' => 'ks-news',
     'class_name' => ''
   ], $atts);
 
