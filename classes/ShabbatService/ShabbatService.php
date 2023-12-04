@@ -64,7 +64,7 @@ class ShabbatService
     $this->img_url = get_the_post_thumbnail_url($post, 'full');
     $this->title = $post->post_title;
     $this->excerpt = get_the_excerpt($post);
-    $this->event_time = get_post_meta($post->ID, 'event_date', true);
+    $this->event_time = new DateTime(get_post_meta($post->ID, 'event_date', true));
     $this->post_url = get_permalink($post->ID);
   }
 
@@ -74,7 +74,7 @@ class ShabbatService
    */
   public function render(): string
   {
-    if ($this->title = null) {
+    if ($this->title == null) {
       return "<p>Sorry, no upcoming services were found.</p>";
     }
 

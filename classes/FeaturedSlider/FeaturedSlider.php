@@ -27,7 +27,8 @@ class FeaturedSlider
     string $slider_html_id,
     string $category,
     int $number_of_posts,
-    CoverPost|null $cover_post = null
+    CoverPost|null $cover_post = null,
+    string $timezone = 'America/New_York'
   ) {
     // Queries $query_params posts from $category
     $query_params = [
@@ -53,7 +54,10 @@ class FeaturedSlider
       $excerpt = get_the_excerpt($post);
       $permalink = get_permalink($post);
       if (get_field('event_date', $post->ID)) {
-        $event_date = get_post_meta($post->ID, 'event_date', true);
+        $event_date = new DateTime(
+          get_post_meta($post->ID, 'event_date', true),
+          new DateTimeZone('America/New_York')
+        );
       } else {
         $event_date = null;
       }
@@ -63,7 +67,7 @@ class FeaturedSlider
         $post->post_title,
         $excerpt,
         $permalink,
-        new DateTime($event_date)
+        $event_date
       );
     }, $query);
 
@@ -104,7 +108,7 @@ class FeaturedSlider
       $this->featured_posts,
       function ($carry, $post) {
         $content = $post->render_content();
-        return $carry . "$content,";
+        return $carry . "\"$content\",";
       },
       "["
     ) . "]";

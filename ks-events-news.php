@@ -9,7 +9,6 @@ Author URI:   https://btreiner.com/
 
 // Imports
 require_once plugin_dir_path(__FILE__) . 'classes/FeaturedSlider/FeaturedSlider.php';
-require_once plugin_dir_path(__FILE__) . 'classes/FeaturedSlider/CoverPost.php';
 require_once plugin_dir_path(__FILE__) . 'classes/EventsSlider/EventsSlider.php';
 require_once plugin_dir_path(__FILE__) . 'classes/NewsGrid/NewsGrid.php';
 require_once plugin_dir_path(__FILE__) . 'classes/PhotoLinks/PhotoLink.php';
@@ -23,7 +22,7 @@ function ks_enqueue_post_display_styles()
   wp_enqueue_style('ks_photo_links', plugin_dir_url(__FILE__) . 'css/photo-link.css');
   wp_enqueue_style('ks_shabbat_services', plugin_dir_url(__FILE__) . 'css/shabbat-service.css');
 }
-add_action('wp_enqueue_scripts', 'ks_enqueue_post_display_scripts');
+add_action('wp_enqueue_scripts', 'ks_enqueue_post_display_styles');
 
 // Enqueue scripts
 function ks_enqueue_swiper_scripts()
@@ -102,7 +101,7 @@ function shortcode_generate_events_slider($atts): string
  * @param array $atts The shortcode attributes
  * @return string The markup for the grid
  */
-function shortcode_generate_news_grid(array $atts): string
+function shortcode_generate_news_grid($atts): string
 {
   $sc_atts = shortcode_atts([
     'number_of_posts' => 6,
@@ -137,7 +136,7 @@ function shortcode_generate_photo_link($atts): string
     $sc_atts['title_text'],
     $sc_atts['body_text'],
     $sc_atts['href'],
-    $sc_atts['img_url'],
+    $sc_atts['img_src'],
     $sc_atts['img_alt']
   );
 
