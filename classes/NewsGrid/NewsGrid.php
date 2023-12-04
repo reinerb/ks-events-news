@@ -61,7 +61,7 @@ class NewsGrid
     $cards = array_reduce(
       $this->posts,
       function ($carry, $post) {
-        return $carry . $post->render;
+        return $carry . $post->render();
       },
       ""
     );
