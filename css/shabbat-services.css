@@ -4,7 +4,7 @@
   --shabbat-btn-text: #1c68a6;
 }
 
-.shabbat_service {
+.shabbat-service {
   display: grid;
   grid-template-columns: clamp(150px, 30%, 250px) 1fr;
   place-items: start center;
@@ -14,12 +14,12 @@
   height: 100%;
 }
 
-.shabbat_service__image {
+.shabbat-service__image {
   justify-self: center;
   width: 100%;
 }
 
-.shabbat_service__content {
+.shabbat-service__content {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -28,21 +28,21 @@
   height: 100%;
 }
 
-.shabbat_service__content > * {
+.shabbat-service__content > * {
   margin: 0;
   padding: 0;
 }
 
-.shabbat_service__date-time {
+.shabbat-service__date-time {
   font-style: italic;
   font-size: 1.125rem;
 }
 
-.shabbat_service__excerpt {
+.shabbat-service__excerpt {
   margin-bottom: 1rem;
 }
 
-.shabbat_service__button {
+.shabbat-service__button {
   align-self: center;
   margin-top: auto;
   font-weight: 700;
@@ -53,7 +53,7 @@
   transition: background-color 300ms ease;
 }
 
-.shabbat_service__button:hover {
+.shabbat-service__button:hover {
   background-color: var(--shabbat-btn-bg-hover);
 }
 
