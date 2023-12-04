@@ -79,7 +79,7 @@ class FeaturedPost
       ";
     }
 
-    $stripped_excerpt = str_replace(["\n", "&#13;", "&#10;"], '. ', $this->excerpt);
+    $stripped_excerpt = addslashes(str_replace(["\n", "&#13;", "&#10;"], '. ', $this->excerpt));
 
     return "\"<h3 class='featured-content__title'>$this->title</h3>$rendered_date_time<p class='featured-content__excerpt'>$stripped_excerpt</p><a href='$this->post_url' class='featured-content__button'>Read more</a>\",";
   }
