@@ -79,11 +79,6 @@ class FeaturedPost
       ";
     }
 
-    return "
-      <h3 class='featured-content__title'>$this->title</h3>
-      $rendered_date_time
-      <p class='featured-content__excerpt'>$this->excerpt</p>
-      <a href='$this->post_url' class='featured-content__button'>Read more</a>
-    ";
+    return "\"<h3 class='featured-content__title'>$this->title</h3>$rendered_date_time<p class='featured-content__excerpt'>$this->excerpt</p><a href='$this->post_url' class='featured-content__button'>Read more</a>\",";
   }
 }

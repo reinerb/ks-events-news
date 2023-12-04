@@ -1,6 +1,7 @@
 <?php
 // Imports
 require_once WP_PLUGIN_DIR . "/ks-events-news/functions/find-posts.php";
+require_once WP_PLUGIN_DIR . "/ks-events-news/functions/dashes-to-camel-case.php";
 require_once plugin_dir_path(__FILE__) . "FeaturedPost.php";
 require_once plugin_dir_path(__FILE__) . "CoverPost.php";
 
@@ -107,11 +108,10 @@ class FeaturedSlider
     return array_reduce(
       $this->featured_posts,
       function ($carry, $post) {
-        $content = $post->render_content();
-        return $carry . "\"$content\",";
+        return $carry . $post->render_content();
       },
-      "["
-    ) . "]";
+      '['
+    ) . ']';
   }
 
   /**
@@ -126,6 +126,8 @@ class FeaturedSlider
     $image_slides = $this->render_image_slides();
     $content_array = $this->create_content_array();
 
+    $variable_name = dashes_to_camel_case($this->html_id);
+
     $html_markup = "
       <div class='swiper' id='$this->html_id'>
         $image_slides
@@ -139,7 +141,7 @@ class FeaturedSlider
       <script>
         const slideContent = $content_array;
         const featuredWrapper = document.querySelector(#$this->html_id > .featured-content);
-        const $this->html_id = new Swiper('#$this->html_id', {
+        const $variable_name = new Swiper('#$this->html_id', {
           loop: true,
           speed: 500,
           navigation: {
@@ -152,7 +154,7 @@ class FeaturedSlider
             },
           }
         });
-        $this->html_id.on('slideChange', () => {
+        $variable_name.on('slideChange', () => {
           featuredWrapper.classList.add('faded-out');
           setTimeout(() => {
             featuredWrapper.innerHTML = slideContent[$this->html_id.realIndex];
