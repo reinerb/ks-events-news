@@ -140,7 +140,7 @@ class FeaturedSlider
     $swiper_js = "
       <script>
         const slideContent = $content_array;
-        const featuredWrapper = document.querySelector(#$this->html_id > .featured-content);
+        const featuredWrapper = document.querySelector('#$this->html_id > .featured-content');
         const $variable_name = new Swiper('#$this->html_id', {
           loop: true,
           speed: 500,
