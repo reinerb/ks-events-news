@@ -150,7 +150,7 @@ class FeaturedSlider
           },
           on: {
             init: () => {
-              featuredWrapper.innerHTML = slideContent[0],
+              featuredWrapper.innerHTML = slideContent[0];
             },
           }
         });
