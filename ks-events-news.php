@@ -16,19 +16,21 @@ require_once plugin_dir_path(__FILE__) . 'classes/PhotoLinks/PhotoLink.php';
 require_once plugin_dir_path(__FILE__) . 'classes/ShabbatService/ShabbatService.php';
 
 // Enqueue stylesheets
-function enqueue_post_display_scripts()
+function ks_enqueue_post_display_styles()
 {
-  wp_enqueue_style('swiper-css', plugin_dir_url(__FILE__) . 'css/swiper-bundle.min.css');
-  wp_enqueue_script('swiper-scripts', plugin_dir_url(__FILE__) . 'js/swiper-bundle.min.js');
-  wp_enqueue_style(
-    'ks_news_post_display',
-    plugin_dir_url(__FILE__) . 'css/news-posts.css',
-    ['swiper-css']
-  );
+  wp_enqueue_style('ks_swiper-css', plugin_dir_url(__FILE__) . 'css/swiper-bundle.min.css');
+  wp_enqueue_style('ks_news_post_display', plugin_dir_url(__FILE__) . 'css/news-posts.css');
   wp_enqueue_style('ks_photo_links', plugin_dir_url(__FILE__) . 'css/photo-link.css');
   wp_enqueue_style('ks_shabbat_services', plugin_dir_url(__FILE__) . 'css/shabbat-service.css');
 }
-add_action('wp_enqueue_scripts', 'enqueue_post_display_scripts');
+add_action('wp_enqueue_scripts', 'ks_enqueue_post_display_scripts');
+
+// Enqueue scripts
+function ks_enqueue_swiper_scripts()
+{
+  wp_enqueue_script('ks_swiper-scripts', plugin_dir_url(__FILE__) . 'js/swiper-bundle.min.js');
+}
+add_action('wp_enqueue_scripts', 'ks_enqueue_swiper_scripts');
 
 // Add shortcodes
 add_shortcode('featured_slider', 'shortcode_generate_featured_slider');
@@ -65,7 +67,7 @@ function shortcode_generate_featured_slider($atts): string
 
   $slider = new FeaturedSlider(
     $sc_atts['html_id'],
-    $sc_atts['category'],
+    $sc_atts['category_name'],
     $sc_atts['number_of_posts'],
     $cover_post
   );
@@ -88,7 +90,7 @@ function shortcode_generate_events_slider($atts): string
 
   $slider = new EventsSlider(
     $sc_atts['html_id'],
-    $sc_atts['category'],
+    $sc_atts['category_name'],
     $sc_atts['number_of_posts'],
   );
 
