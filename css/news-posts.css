@@ -99,6 +99,7 @@
   color: white;
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .post-card__image {
