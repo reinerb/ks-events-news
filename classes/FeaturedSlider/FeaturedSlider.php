@@ -29,7 +29,6 @@ class FeaturedSlider
     string $category,
     int $number_of_posts,
     CoverPost|null $cover_post = null,
-    string $timezone = 'America/New_York'
   ) {
     // Queries $query_params posts from $category
     $query_params = [

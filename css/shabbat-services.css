@@ -33,6 +33,10 @@
   padding: 0;
 }
 
+.shabbat-service__content > *:not(a) {
+  color: white;
+}
+
 .shabbat-service__date-time {
   font-style: italic;
   font-size: 1.125rem;

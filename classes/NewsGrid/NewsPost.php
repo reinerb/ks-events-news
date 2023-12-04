@@ -43,7 +43,7 @@ class NewsPost
         <img src='$this->img_url' class='post-card__image' alt='The featured image for $this->title' />
         <div class='post-card__content'>
           <h3 class='post-card__title'>$this->title</h3>
-          <a href='$this->post_url' class='post-card__read-more'>Read More</a>
+          <a href='$this->post_url' class='post-card__button'>Read More</a>
         </div>
       </div>";
   }
