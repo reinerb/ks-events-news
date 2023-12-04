@@ -48,7 +48,7 @@ function shortcode_generate_featured_slider($atts): string
   $sc_atts = shortcode_atts([
     'category_name' => 'featured',
     'number_of_posts' => 4,
-    'html_id' => 'featured_slider',
+    'html_id' => 'featured',
     'cover_image_url' => 'https://keremshalom.org/wp-content/uploads/2023/04/IMG_1661-scaled.jpeg',
     'cover_title' => 'Welcome to Kerem Shalom!',
     'cover_content' => 'We are a vibrant, inclusive, progressive Jewish community located in Concord, MA.',
