@@ -20,7 +20,7 @@ function ks_enqueue_post_display_styles()
   wp_enqueue_style('ks_swiper-css', plugin_dir_url(__FILE__) . 'css/swiper-bundle.min.css');
   wp_enqueue_style('ks_news_post_display', plugin_dir_url(__FILE__) . 'css/news-posts.css');
   wp_enqueue_style('ks_photo_links', plugin_dir_url(__FILE__) . 'css/photo-link.css');
-  wp_enqueue_style('ks_shabbat_services', plugin_dir_url(__FILE__) . 'css/shabbat-service.css');
+  wp_enqueue_style('ks_shabbat_services', plugin_dir_url(__FILE__) . 'css/shabbat-services.css');
 }
 add_action('wp_enqueue_scripts', 'ks_enqueue_post_display_styles');
 
