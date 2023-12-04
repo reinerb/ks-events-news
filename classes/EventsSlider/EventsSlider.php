@@ -1,6 +1,7 @@
 <?php
 // Imports
 require_once WP_PLUGIN_DIR . "/ks-events-news/functions/find-posts.php";
+require_once WP_PLUGIN_DIR . "/ks-events-news/functions/dashes-to-camel-case.php";
 require_once plugin_dir_path(__FILE__) . "EventPost.php";
 
 class EventsSlider
@@ -98,6 +99,8 @@ class EventsSlider
 
     $slides = $this->render_slides();
 
+    $variable_name = dashes_to_camel_case($this->html_id);
+
     $html_markup = "
       <div class='swiper' id='$this->html_id'>
         $slides
@@ -108,7 +111,7 @@ class EventsSlider
 
     $swiper_js = "
       <script>
-        const $this->html_id = new Swiper('#$this->html_id', {
+        const $variable_name = new Swiper('#$this->html_id', {
           speed: 500,
           navigation: {
             nextEl: '#$this->html_id > .swiper-button-next',
