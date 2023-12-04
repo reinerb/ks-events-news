@@ -15,6 +15,11 @@
   text-align: center;
 }
 
+.photo-link__image {
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
 .photo-link__content {
   display: none;
 }
