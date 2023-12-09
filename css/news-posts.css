@@ -61,7 +61,7 @@
   flex-direction: column;
   gap: 1rem;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   text-align: center;
   transition: opacity 250ms ease-in-out;
 }
@@ -70,8 +70,20 @@
   color: white;
 }
 
+.swiper .content-wrapper .featured-content__title {
+  font-size: 30px;
+}
+
+.swiper .content-wrapper .featured-content__excerpt {
+  font-size: 1.25rem;
+}
+
 .featured-content__date-time {
   font-style: italic;
+}
+
+.featured-content__button {
+  font-size: 1.25rem;
 }
 
 @media screen and (max-width: 900px) {
