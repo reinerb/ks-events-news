@@ -32,7 +32,7 @@ class FeaturedSlider
   ) {
     // Queries $query_params posts from $category
     $query_params = [
-      "category" => $category,
+      "category_name" => $category,
       "number_of_posts" => $number_of_posts,
       "order" => "DESC",
       "orderby" => "date"
