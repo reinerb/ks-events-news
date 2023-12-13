@@ -52,8 +52,8 @@ function shortcode_generate_featured_slider($atts): string
     'cover_image_url' => 'https://keremshalom.org/wp-content/uploads/2023/04/IMG_1661-scaled.jpeg',
     'cover_title' => 'Welcome to Kerem Shalom!',
     'cover_content' => 'We are a vibrant, inclusive, progressive Jewish community located in Concord, MA.',
-    'cover_button_text' => 'Join Us for Shabbat!',
-    'cover_button_url' => 'https://keremshalom.org/current-events/join-ks-for-shabbat-services/'
+    'cover_button_text' => 'Learn More About KS!',
+    'cover_button_url' => 'https://keremshalom.org/about-us/'
   ], $atts);
 
   $cover_post = new CoverPost(
