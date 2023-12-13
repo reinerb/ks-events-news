@@ -53,7 +53,8 @@ function shortcode_generate_featured_slider($atts): string
     'cover_title' => 'Welcome to Kerem Shalom!',
     'cover_content' => 'We are a vibrant, inclusive, progressive Jewish community located in Concord, MA.',
     'cover_button_text' => 'Learn More About KS!',
-    'cover_button_url' => 'https://keremshalom.org/about-us/'
+    'cover_button_url' => 'https://keremshalom.org/about-us/',
+    'transition_duration' => null,
   ], $atts);
 
   $cover_post = new CoverPost(
@@ -68,7 +69,8 @@ function shortcode_generate_featured_slider($atts): string
     $sc_atts['html_id'],
     $sc_atts['category_name'],
     $sc_atts['number_of_posts'],
-    $cover_post
+    $cover_post,
+    $sc_atts['transition_duration'],
   );
 
   return $slider->render();

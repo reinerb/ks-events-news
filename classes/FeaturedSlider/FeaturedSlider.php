@@ -18,6 +18,11 @@ class FeaturedSlider
   public $html_id;
 
   /**
+   * The string with the transition duration for Swiper
+   */
+  public $transition;
+
+  /**
    * Creates a new FeaturedSlider object
    * @param string $slider_html_id The HTML ID of the rendered Swiper slider
    * @param string $category The blog category to find posts from
@@ -29,6 +34,7 @@ class FeaturedSlider
     string $category,
     int $number_of_posts,
     CoverPost|null $cover_post = null,
+    int|null $transition_duration = null,
   ) {
     // Queries $query_params posts from $category
     $query_params = [
@@ -47,6 +53,15 @@ class FeaturedSlider
       $this->featured_posts = [];
     } else {
       $this->featured_posts = [$cover_post];
+    }
+
+    if ($transition_duration == null) {
+      $this->transition = '';
+    } else {
+      $this->transition = "autoplay: {
+        delay: $transition_duration,
+        pauseOnMouseEnter: true,
+      },";
     }
 
     array_map(function ($post) {
@@ -143,6 +158,7 @@ class FeaturedSlider
         const $variable_name = new Swiper('#$this->html_id', {
           loop: true,
           speed: 500,
+          $this->transition
           navigation: {
             nextEl: '#$this->html_id > .swiper-button-next',
             prevEl: '#$this->html_id > .swiper-button-prev',
