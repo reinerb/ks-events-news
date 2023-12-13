@@ -70,7 +70,7 @@ function shortcode_generate_featured_slider($atts): string
     $sc_atts['category_name'],
     $sc_atts['number_of_posts'],
     $cover_post,
-    $sc_atts['transition_duration'],
+    $sc_atts['transition_duration']
   );
 
   return $slider->render();
