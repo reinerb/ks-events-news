@@ -26,11 +26,16 @@
   margin-inline: 1rem;
   width: 100%;
   height: 100%;
+  line-height: 1.4;
 }
 
 .shabbat-service__content > * {
   margin: 0;
   padding: 0;
+}
+
+.shabbat-service__content a {
+  color: #ffffb6 !important;
 }
 
 .shabbat-service__content > *:not(a) {

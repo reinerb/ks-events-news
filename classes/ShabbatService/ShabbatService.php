@@ -21,12 +21,7 @@ class ShabbatService
   /**
    * The service description
    */
-  public $excerpt;
-
-  /**
-   * The link to the service post
-   */
-  public $post_url;
+  public $content;
 
   /**
    * Creates a new ShabbatService instance
@@ -55,17 +50,15 @@ class ShabbatService
     } catch (Exception $e) {
       $this->img_url = null;
       $this->title = null;
-      $this->excerpt = null;
+      $this->content = null;
       $this->event_time = null;
-      $this->post_url = null;
       return;
     }
 
     $this->img_url = get_the_post_thumbnail_url($post, 'full');
     $this->title = $post->post_title;
-    $this->excerpt = get_the_excerpt($post);
+    $this->content = $post->post_content;
     $this->event_time = new DateTime(get_post_meta($post->ID, 'event_date', true));
-    $this->post_url = get_permalink($post->ID);
   }
 
   /**
@@ -75,7 +68,7 @@ class ShabbatService
   public function render(): string
   {
     if ($this->title == null) {
-      return "<p>Sorry, no upcoming services were found.</p>";
+      return "<p>Sorry, we don't have any upcoming services listed yet. Check back later.</p>";
     }
 
     $rendered_date = $this->event_time->format("l, F j, Y");
@@ -88,8 +81,7 @@ class ShabbatService
         <div class='shabbat-service__content'>
           <h3 class='shabbat-service__title'>$this->title</h3>
           <p class='shabbat-service__date-time'>$rendered_date at $rendered_time</p>
-          <p class='shabbat-service__excerpt'>$this->excerpt</p>
-          <a class='shabbat-service__button' href=$this->post_url>Read more</a>
+          $this->content
         </div>
       </div>
     ";

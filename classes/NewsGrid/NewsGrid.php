@@ -21,18 +21,32 @@ class NewsGrid
     string $category,
     int $number_of_posts,
   ) {
-    // Queries $query_params posts from $category
+
+    // Set up query parameters
     $query_params = [
       'category_name' => $category,
       'posts_per_page' => $number_of_posts,
-      'order' => 'DESC',
-      'orderby' => 'date',
     ];
     try {
-      $query = ks_find_posts($query_params);
+      $non_sticky_query = ks_find_posts($query_params);
     } catch (Exception $e) {
-      $query = [];
+      $non_sticky_query = [];
     }
+
+    // Get most recent sticky post, if it exists
+    $sticky_query_params = [
+      'category_name' => $category,
+      'posts_per_page' => 1,
+      'post__in' => get_option('sticky_posts'),
+      'ignore_sticky_posts' => 1,
+    ];
+    try {
+      $sticky_query = ks_find_posts($sticky_query_params);
+    } catch (Exception $e) {
+      $sticky_query = [];
+    }
+
+    $query = array_slice(array_merge($sticky_query, $non_sticky_query), 0, 3);
 
     $this->posts = array_map(function ($post) {
       $img_url = get_the_post_thumbnail_url($post, 'full');

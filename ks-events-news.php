@@ -2,7 +2,7 @@
 /*
 Plugin Name:  Kerem Shalom Homepage
 Description:  Displays all events and news at Kerem Shalom.
-Version:      0.5
+Version:      1.0
 Author:       Benjamin Reiner
 Author URI:   https://btreiner.com/
 */

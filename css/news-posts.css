@@ -4,12 +4,10 @@
   --btn-dark-bg: #193e61;
   --btn-dark-bg-hover: #184a74;
   --btn-dark-text: #ffffff;
-  /* --btn-light-bg: #8ec3eb;
-  --btn-light-bg-hover: #c3def4; */
   --btn-light-bg: #ffffff;
   --btn-light-bg-hover: #e0e0e0;
-  /* --btn-light-text: #112840; */
   --btn-light-text: #1c68a6;
+  --swiper-navigation-color: #ffffff;
 }
 
 .faded-out {
@@ -37,9 +35,19 @@
   aspect-ratio: var(--aspect-ratio);
 }
 
+#featured .swiper-slide {
+  display: flex;
+  justify-content: center;
+}
+
 #featured .swiper-slide img {
   aspect-ratio: var(--aspect-ratio);
   object-fit: cover;
+}
+
+#featured .swiper-button-prev,
+#featured .swiper-button-next {
+  font-weight: 900;
 }
 
 .swiper .content-wrapper {
@@ -76,6 +84,7 @@
 
 .swiper .content-wrapper .featured-content__excerpt {
   font-size: 1.25rem;
+  line-height: 1.4;
 }
 
 .featured-content__date-time {
@@ -132,6 +141,7 @@
   flex-direction: column;
   gap: 0.5rem;
   padding: 1rem;
+  line-height: 1.4;
 }
 
 .post-card__content > * {
